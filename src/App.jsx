@@ -10,6 +10,7 @@ import Test from "./components/test"
 import React from "react";
 import Header from "./components/header";
 import Landing from "./components/landing"
+import Contact from "./components/componentForm"
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing/>} />
           <Route path="/test" element={<Test/>} />
+          <Route path="/contact" element={<Contact/>} />
 
         </Routes>
       </BrowserRouter>

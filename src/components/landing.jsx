@@ -10,6 +10,7 @@ export default function landing() {
 <Component1/>
 <Component2/>
 <Component3/>
+
 </>
   )
 }

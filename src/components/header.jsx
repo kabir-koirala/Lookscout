@@ -34,7 +34,7 @@ export default function header() {
           <Link to="/" className="text-white font-semibold md:text-primary-dark">Home</Link>
           <Link to="/" className="text-white font-semibold md:text-primary-dark">Our Products</Link>
           <Link to="/" className="text-white font-semibold md:text-primary-dark">Resources</Link>
-          <Link to="/" className="text-white font-semibold md:text-primary-dark">Contacts</Link>
+          <Link to="/contact" className="text-white font-semibold md:text-primary-dark">Contacts</Link>
         </div>
 
 
