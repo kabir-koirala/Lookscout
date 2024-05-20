@@ -54,7 +54,10 @@ export default function componentForm() {
           </p>
         </div>
         <form onSubmit={handleSubmit} className="container">
-          <div className="pt-5">
+
+
+         <div className="md:grid  grid-cols-2 gap-5">
+         <div className="pt-5">
             <label htmlFor="" className="text-white ">
               First Name
             </label>
@@ -90,7 +93,11 @@ export default function componentForm() {
               </div>
             )}
           </div>
-          <div className="pt-5">
+         </div>
+
+
+         <div className="md:grid  grid-cols-2 gap-5">
+         <div className="pt-5">
             <label htmlFor="" className="text-white ">
               Phone Number
             </label>
@@ -127,6 +134,11 @@ export default function componentForm() {
               {errors.contact}
             </div>
           )}
+
+         </div>
+
+
+
           <div className="py-5">
             <label htmlFor="" className="text-white ">
               Message
