@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function componentForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
   const [phone, setPhone] = useState("");
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
@@ -19,15 +19,22 @@ export default function componentForm() {
     if (!phone.trim()) {
       errors.phone = "Please enter your Phone Number";
     }
-    if (!contact.trim()) {
-      errors.contact = "Please enter your Contact us";
-    }
+    // if (!contact.trim()) {
+    //   errors.contact = "Please enter your Contact us";
+    // }
     if (!message.trim()) {
       errors.message = "Please enter your Contact us";
     }
     return errors;
   };
-  const handleSubmit = (e) => {
+  // const clearFormFields = () => {
+  //   setName("");
+  //   setEmail("");
+  //   setPhone("");
+  //   setContact("");
+  //   setMessage("");
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = validateForm();
 
@@ -38,6 +45,20 @@ export default function componentForm() {
       }, 2000);
       return;
     }
+    try {
+      await axios.post("http://localhost:3000/contactForm", {
+        name,
+        email,
+        phone,
+        contact,
+        message,
+      });
+      // clearFormFields();
+      alert("Contact saved in database");
+    } catch (e) {
+      console.error("error while adding room", e);
+    }
+
     console.log("Submitted");
   };
   return (
@@ -50,100 +71,94 @@ export default function componentForm() {
           <p className="text-white px-5 text-center">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,{" "}
+            ever since the 1500s.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="container">
+          <div className="md:grid  grid-cols-2 gap-5">
+            <div className="pt-5">
+              <label htmlFor="" className="text-white ">
+                First Name
+              </label>
 
-
-         <div className="md:grid  grid-cols-2 gap-5">
-         <div className="pt-5">
-            <label htmlFor="" className="text-white ">
-              First Name
-            </label>
-
-            <br />
-            <input
-              className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
-              type="text"
-              placeholder="   Input"
-              onChange={(e) => setName(e.target.value)}
-            />
-            {errors.name && (
-              <div className="alert alert-danger mt-2 text-red-700">
-                {errors.name}
-              </div>
-            )}
-          </div>
-          <div className="pt-5">
-            <label htmlFor="" className="text-white ">
-              Email Address
-            </label>
-
-            <br />
-            <input
-              className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
-              type="email"
-              placeholder="   Input"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            {errors.email && (
-              <div className="alert alert-danger mt-2 text-red-700">
-                {errors.email}
-              </div>
-            )}
-          </div>
-         </div>
-
-
-         <div className="md:grid  grid-cols-2 gap-5">
-         <div className="pt-5">
-            <label htmlFor="" className="text-white ">
-              Phone Number
-            </label>
-
-            <br />
-            <input
-              className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
-              type="text"
-              placeholder="   +000"
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            {errors.phone && (
-              <div className="alert alert-danger mt-2 text-red-700">
-                {errors.phone}
-              </div>
-            )}
-          </div> 
-          <div className="pt-5">
-            <label htmlFor="" className="text-white ">
-              Contact us
-            </label>
-
-            <br />
-
-            <select
-              className="h-9 w-full rounded-md bg-primary-lite text-white px-3"
-              onChange={(e) => setContact(e.target.value)}
-            >
-              <option className="text-white">Dropdown</option>
-            </select>
-          </div>
-          {errors.contact && (
-            <div className="alert alert-danger mt-2 text-red-700">
-              {errors.contact}
+              <br />
+              <input
+                className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
+                type="text"
+                placeholder="   Input"
+                onChange={(e) => setName(e.target.value)}
+              />
+              {errors.name && (
+                <div className="alert alert-danger mt-2 text-red-700">
+                  {errors.name}
+                </div>
+              )}
             </div>
-          )}
+            <div className="pt-5">
+              <label htmlFor="" className="text-white ">
+                Email Address
+              </label>
 
-         </div>
+              <br />
+              <input
+                className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
+                type="email"
+                placeholder="   Input"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {errors.email && (
+                <div className="alert alert-danger mt-2 text-red-700">
+                  {errors.email}
+                </div>
+              )}
+            </div>
+          </div>
 
+          <div className="md:grid  grid-cols-2 gap-5">
+            <div className="pt-5">
+              <label htmlFor="" className="text-white ">
+                Phone Number
+              </label>
 
+              <br />
+              <input
+                className="h-9 w-full rounded-md bg-primary-lite placeholder-white"
+                type="text"
+                placeholder="   +000"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              {errors.phone && (
+                <div className="alert alert-danger mt-2 text-red-700">
+                  {errors.phone}
+                </div>
+              )}
+            </div>
+            <div className="pt-5">
+              <label htmlFor="" className="text-white ">
+                Contact us
+              </label>
+
+              <br />
+
+              <select
+                className="h-9 w-full rounded-md bg-primary-lite text-white px-3"
+                onChange={(e) => setContact(e.target.value)}
+              >
+                <option className="text-white">Dropdown</option>
+              </select>
+            </div>
+            {errors.contact && (
+              <div className="alert alert-danger mt-2 text-red-700">
+                {errors.contact}
+              </div>
+            )}
+          </div>
 
           <div className="py-5">
             <label htmlFor="" className="text-white ">
               Message
             </label>
-            
+
             <br />
             <textarea
               className="w-full rounded-md bg-primary-lite placeholder-white placeholder"
@@ -157,7 +172,7 @@ export default function componentForm() {
               </div>
             )}
           </div>
-          
+
           <input
             type="checkbox"
             className="h-4 w-4 text-primary-lite focus:ring-primary-dark border-gray-300 rounded"
